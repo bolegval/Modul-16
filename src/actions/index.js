@@ -1,15 +1,44 @@
-export const deleteComment = key => {
+let commentId = 0;
+
+let date = () => {
+  const newDate = new Date();
+  return newDate.toLocaleString();
+};
+
+export const addNewComment = (author, commentText) => {
   return {
-    type: "DELETE_COMMENT",
-    key
+    type: "ADD_NEW_COMMENT",
+    id: commentId++,
+    author,
+    dateComment: date(),
+    commentText
   };
 };
 
-export const addComment = (author, commentText) => {
-  console.log("HI");
+export const addNewAuthor = text => {
   return {
-    type: "ADD_COMMENT",
-    author,
-    commentText
+    type: "ADD_NEW_AUTHOR",
+    text
+  };
+};
+
+export const addNewCommentText = text => {
+  return {
+    type: "ADD_NEW_COMMENT_TEXT",
+    text
+  };
+};
+
+export const deleteComment = id => {
+  return {
+    type: "DELETE_COMMENT",
+    id
+  };
+};
+
+export const addButton = add => {
+  return {
+    type: "ADD_COMMENT_ACTIVE",
+    add
   };
 };

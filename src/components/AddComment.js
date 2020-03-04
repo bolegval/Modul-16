@@ -1,37 +1,56 @@
 import React from "react";
-import { addComment } from "../actions/index";
-
-const AddComment = ({ addComment, author, commentText }) => {
+import {
+  addNewComment,
+  addNewAuthor,
+  addNewCommentText,
+  addButton
+} from "../actions/index";
+const AddComment = ({
+  addNewComment,
+  addNewAuthor,
+  newAuthor,
+  addNewCommentText,
+  newCommentText,
+  addButton,
+  addActive
+}) => {
   return (
     <div>
       <button
         className="btn__add-comment"
-        onClick={ev => {
-          addComment(author, commentText);
+        onClick={() => {
+          addNewComment(newAuthor.text, newCommentText.text);
+          addNewAuthor("");
+          addNewCommentText("");
+          addButton(addActive.add);
         }}
       >
         Добавить комментарий
       </button>
-      <div className="add-comment">
-        <p>Ваше имя:</p>
-        <input
-          type="text"
-          className="comment__author"
-          placeholder="Ваше имя"
-          onChange={ev => {
-            author: ev.target.value;
-          }}
-        />
-        <p>Ваш комментарий:</p>
-        <textarea
-          type="text"
-          className="comment__text"
-          placeholder="Напишите комментарий"
-          onChange={ev => {
-            commentText: ev.target.value;
-          }}
-        ></textarea>
-      </div>
+      {addActive.add ? (
+        <div className="add-comment">
+          <p>Ваше имя:</p>
+          <input
+            type="text"
+            className="comment__author"
+            placeholder="Ваше имя"
+            value={newAuthor.text}
+            onChange={ev => {
+              addNewAuthor(ev.target.value);
+            }}
+          />
+          <p>Ваш комментарий:</p>
+          <textarea
+            type="text"
+            className="comment__text"
+            placeholder="Напишите комментарий"
+            value={newCommentText.text}
+            onChange={ev => {
+              addNewCommentText(ev.target.value);
+            }}
+          ></textarea>
+        </div>
+      ) : null}
     </div>
   );
 };

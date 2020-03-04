@@ -4,19 +4,19 @@ import { deleteComment } from "../actions/index";
 const CommentList = ({ comments, deleteComment }) => {
   return (
     <ul className="comments__list">
-      {comments.map((item, index) => {
+      {comments.map(item => {
         return (
-          <li key={index} className="comments__item">
+          <li key={item.id} className="comments__item">
             <div>
               <p>
                 <span>Автор: {item.author} </span>
-                {/* <span>Дата: {comments.dateComment} </span> */}
+                <span>Дата: {item.dateComment} </span>
                 {item.commentText}
               </p>
               <button
                 className="edit"
-                onClick={ev => {
-                  deleteComment(index);
+                onClick={() => {
+                  deleteComment(item.id);
                 }}
               >
                 Удалить
